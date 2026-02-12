@@ -7,7 +7,7 @@ export interface ButtonProps {
     variant: Variants;
     size: Size;
     text: string;
-    startIcon?: ReactElement;
+    startIcon?: ReactElement; 
     endIcon?:ReactElement;
     onClick: () => void;
 }
