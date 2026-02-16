@@ -21,7 +21,7 @@ const sizeStyles = {
     "md" : "py-2 px-4",
     "lg" : "py-5 px-6",
 }
-const defaultStyles =  "flex rounded-md";
+const defaultStyles =  "flex items-center rounded-md font-light";
 export const Button = (props:ButtonProps) => {
     return<>
     <button className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.size} ${defaultStyles}`}>{props.startIcon ? <div className=" pr-2">{props.startIcon}</div> : null }{props.text}{props.endIcon}</button>
