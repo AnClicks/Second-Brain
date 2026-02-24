@@ -9,7 +9,7 @@ export interface ButtonProps {
     text: string;
     startIcon?: ReactElement; 
     endIcon?:ReactElement;
-    onClick: () => void;
+    onClick?: () => void; 
 }
 const variantStyles  = {
      "primary" : "bg-blue-400 text-white",
@@ -24,6 +24,6 @@ const sizeStyles = {
 const defaultStyles =  "flex items-center rounded-md font-light";
 export const Button = (props:ButtonProps) => {
     return<>
-    <button className={`${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.size} ${defaultStyles}`}>{props.startIcon ? <div className=" pr-2">{props.startIcon}</div> : null }{props.text}{props.endIcon}</button>
+    <button onClick ={props.onClick} className={` cursor-pointer ${variantStyles[props.variant]} ${sizeStyles[props.size]} ${props.size} ${defaultStyles}`}>{props.startIcon ? <div className=" pr-2">{props.startIcon}</div> : null }{props.text}{props.endIcon}</button>
     </>
 }
