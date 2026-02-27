@@ -6,11 +6,14 @@ import { Card } from './components/ui/Card'
 import { NotebookIcon } from './icons/Notebookicon'
 import { CreateContentModel } from './components/modal/CreateContentModal'
 import { useState } from 'react'
+import { Sidebar } from './components/sidebar/Sidebar'
 function App() {
 
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <div className='p-4'>
+    <div>
+        <Sidebar/>
+      <div className='p-4 ml-72 min-h-screen bg-gray-100'>
       <CreateContentModel open={modalOpen} onClose={()=>{
         setModalOpen(false)
       }} />
@@ -27,6 +30,7 @@ function App() {
       <Card titleIcon={<NotebookIcon size={'lg'} />} title={"first tweet"} type={"x"} link={"https://x.com/bymichael/status/2023290875065896995?s=20"}></Card>
       <Card titleIcon={<NotebookIcon size={'lg'} />} title={"first tweet"} type={"x"} link={"https://x.com/bymichael/status/2023290875065896995?s=20"}></Card>
 
+      </div>
       </div>
     </div>
   )
