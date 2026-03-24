@@ -14,7 +14,7 @@ interface cardProps {
 export const Card = (props: cardProps) => {
     return <>
         <div className="ml-6">
-            <div className='bg-white rounded-md p-4 max-w-72 min-h-48 outline-solid outline-gray-200'>
+            <div className='bg-white rounded-md p-4 max-w-80 min-h-48 outline-solid outline-gray-200'>
                 <div className='flex justify-between'>
                     <div className="flex items-center ">
                         <div className='text-gray-500 p-2'>
@@ -23,16 +23,16 @@ export const Card = (props: cardProps) => {
                         <span className="text-md">{props.title}</span>
                     </div>
                     <div className="flex items-center">
-                        <div className="pr-2 text-gray-500">
+                        <div className="pr-2 text-gray-500 cursor-pointer">
                             <TrashIcon size={"md"} />
                         </div>
-                        <div className="text-gray-500">
+                        <div className="text-gray-500 cursor-pointer">
                             <a href={props.link} target="_blank"></a>
                             <ShareIcon size={"md"} />
                         </div>
                     </div>
                 </div>
-                <div>
+                <div> 
                     {props.type === "youtube" &&
                         <iframe className="w-full p-4"
                             src={props.link.replace("watch?v=", "/embed/")}
