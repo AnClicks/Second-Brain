@@ -12,9 +12,9 @@ import { MONGO_URL } from "./config.js";
 import { userMiddleware } from "./middleware.js";
 import { ContentModel } from "./db.js";
 import { random } from "./utils.js";
-import { readBuilderProgram } from "typescript";
-
+import cors from "cors";
 const app = express();
+app.use(cors());
 app.use(express.json());
 // const PORT = 3000;
 app.get('/',(req,res)=>{

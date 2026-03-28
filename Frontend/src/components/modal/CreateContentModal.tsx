@@ -1,6 +1,6 @@
 
 import { CloseIcon } from "../../icons/Closeicon";
-import { Input } from "./Input"
+import { Input } from "../Input"
 import { Button } from "../ui/Button";
 //controlled component
 export function CreateContentModel({ open, onClose }:any) {
