@@ -3,9 +3,9 @@ import { TrashIcon } from "../../icons/Trashicon"
 import { ShareIcon } from "../../icons/Shareicon"
 import { EmbeddedTweet } from './TweetRender'
 
-type embbedLink = "x" | "youtube";
+type embbedLink = "twitter" | "youtube";
 interface cardProps {
-    titleIcon: ReactElement,
+    titleIcon?: ReactElement,
     title: string,
     type: embbedLink,
     link: string
@@ -44,7 +44,7 @@ export const Card = (props: cardProps) => {
                 </div>
                 <div>
                     {
-                        props.type === "x" &&
+                        props.type === "twitter" &&
                         (() => {
                             const id = props.link.match(/status\/(\d+)/)?.[1];
                             return id ? EmbeddedTweet(id) : null;
