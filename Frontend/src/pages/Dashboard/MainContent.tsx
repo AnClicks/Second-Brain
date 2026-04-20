@@ -6,15 +6,18 @@ import { NotebookIcon } from '../../icons/Notebookicon'
 import { useContent } from '../../hooks/useContent'
 import { CreateContentModel } from '../../components/modal/CreateContentModal'
 import { SearchBar } from '../../components/SearchBar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 export const MainContent = () => {
-  const contents = useContent();
+  const {contents,refresh} = useContent();
   const [modalOpen, setModalOpen] = useState(false);
+  useEffect(()=>{
+    refresh();
+  },[modalOpen])
   return <>
     <div className='w-full m p-4  min-h-screen bg-gray-100'>
       <CreateContentModel open={modalOpen} onClose={() => {
         setModalOpen(false)
-      }} />
+      }}/>
       <div className={` ${modalOpen ? 'pointer-events-none': ''} flex items-center justify-between w-full`}>
       <div className='grow flex justify-center'>
         <div className='ml-18'>
@@ -31,16 +34,12 @@ export const MainContent = () => {
       </div>
 
       </div>
-      <div className='flex ml-8 mt-6'>
+      <div className='flex ml-8 mt-6 flex-wrap'>
       {contents.map(({type, link, title}) =>
       <Card titleIcon={<NotebookIcon size={'lg'}/>} type={type} link={link} title={title}>
       </Card>
       )
       }
-        <Card titleIcon={<NotebookIcon size={'lg'} />} title={"First video"} type={"youtube"} link="https://www.youtube.com/watch?v=E8n9bcOqP2A"></Card>
-                                                                                                  {/* https://youtu.be/usvVGXFIpTM?si=7LGtCidNt2d3GgZM */}
-                                                                                                  {/* https://www.youtube.com/watch?v=CecBiiZrWk0&list=RDk-UQz3f7ZPI&index=6 */}
-        <Card titleIcon={<NotebookIcon size={'lg'} />} title={"first tweet"} type={"twitter"} link={"https://x.com/bymichael/status/2023290875065896995?s=20"}></Card>
       </div>
     </div>
   </>

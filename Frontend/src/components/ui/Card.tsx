@@ -2,7 +2,6 @@ import type { ReactElement } from "react"
 import { TrashIcon } from "../../icons/Trashicon"
 import { ShareIcon } from "../../icons/Shareicon"
 import { EmbeddedTweet } from './TweetRender'
-
 type embbedLink = "twitter" | "youtube";
 interface cardProps {
     titleIcon?: ReactElement,
@@ -10,8 +9,33 @@ interface cardProps {
     type: embbedLink,
     link: string
 }
-
+function deleteCard(){
+    
+}
+function detectLink(link:string) {
+    const baseURL = "https://www.youtube.com/embed/"
+    try{
+        const parsed = new URL(link);
+    
+        if(parsed.hostname === "youtu.be"){
+            const updatedURL  = baseURL+parsed.pathname.slice(1);
+            console.log(updatedURL);
+            return updatedURL
+            }
+        if(parsed.hostname.includes("youtube.com")) {
+            const id = parsed.searchParams.get("v");
+            const updatedURL = baseURL+id;
+                if(id) return updatedURL;
+            
+        }
+        return null;
+    }
+    catch{
+        return null;
+    }
+}
 export const Card = (props: cardProps) => {
+    const link = detectLink(props.link); 
     return <>
         <div className="ml-6">
             <div className='bg-white rounded-md p-4 max-w-80 min-h-48 outline-solid outline-gray-200'>
@@ -23,7 +47,7 @@ export const Card = (props: cardProps) => {
                         <span className="text-md">{props.title}</span>
                     </div>
                     <div className="flex items-center">
-                        <div className="pr-2 text-gray-500 cursor-pointer">
+                        <div className="pr-2 text-gray-500 cursor-pointer" onClick={deleteCard}>
                             <TrashIcon size={"md"} />
                         </div>
                         <div className="text-gray-500 cursor-pointer">
@@ -35,7 +59,10 @@ export const Card = (props: cardProps) => {
                 <div> 
                     {props.type === "youtube" &&
                         <iframe className="w-full p-4"
-                            src={props.link.replace("watch?v=", "/embed/")}
+                            // src={props.link.replace("watch?v=", "/embed/")}
+                            // src= {props.link.replace("youtu.be" , "www.youtube.com")}
+                            //if shared youtube link
+                            src={link}
                             title="YouTube video player"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerPolicy="strict-origin-when-cross-origin"
