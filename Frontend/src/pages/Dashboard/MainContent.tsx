@@ -7,12 +7,30 @@ import { useContent } from '../../hooks/useContent'
 import { CreateContentModel } from '../../components/modal/CreateContentModal'
 import { SearchBar } from '../../components/SearchBar'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { BACKEND_URL, FRONTEND_URL } from '../../config'
+import {ToastContainer, toast} from 'react-toastify'
 export const MainContent = () => {
   const {contents,refresh} = useContent();
   const [modalOpen, setModalOpen] = useState(false);
   useEffect(()=>{
     refresh();
   },[modalOpen])
+  const notify = () => toast("Link copied to clipboard");
+  async function shareContent() {
+    notify();
+    <ToastContainer/>
+    const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
+      share:true
+    },{
+      headers:{
+        "Authorization" : localStorage.getItem("token") 
+      }
+    })
+    const shareURL = `${FRONTEND_URL}${response.data.message}`
+
+    navigator.clipboard.writeText(shareURL);
+  }
   return <>
     <div className='w-full m p-4  min-h-screen bg-gray-100'>
       <CreateContentModel open={modalOpen} onClose={() => {
@@ -26,7 +44,7 @@ export const MainContent = () => {
       </div>
         <div className='flex p-4'>
         <div className='pr-2'>
-          <Button startIcon={<ShareIcon size='md' />} variant="primary" size="md" text="Share Brain" onClick={() => { }}></Button>
+          <Button startIcon={<ShareIcon size='md' />} variant="primary" size="md" text="Share Brain" onClick={shareContent}></Button>
         </div>
         <div>
           <Button startIcon={<PlusIcon size='md' />} variant="secondary" size="md" text="Add content" onClick={() => {setModalOpen(true)}}></Button>
