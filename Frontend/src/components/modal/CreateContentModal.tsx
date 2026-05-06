@@ -6,7 +6,7 @@ import { Button } from "../ui/Button";
 import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
-import * as z from "zod";
+import {Toast} from "../../components/Toast"
 //controlled component
 enum ContentType{
     Youtube = "youtube",
@@ -20,7 +20,7 @@ export function CreateContentModel({ open, onClose }:any) {
     async function addContent(){
         const title = titleRef.current?.value;
         const link = linkRef.current?.value;
-        // console.log(JSON.stringify(title))
+
         if(title != "" || link != ""){
 
             await axios.post(`${BACKEND_URL}/api/v1/content`,{
@@ -32,7 +32,9 @@ export function CreateContentModel({ open, onClose }:any) {
                     "Authorization":localStorage.getItem('token')
                 }
             })
-            onClose()
+            onClose();
+            <Toast text={"Link is copied to clip board"}></Toast>
+            
         }
     }
     return <div >

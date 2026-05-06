@@ -9,17 +9,13 @@ import { SearchBar } from '../../components/SearchBar'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BACKEND_URL, FRONTEND_URL } from '../../config'
-import {ToastContainer, toast} from 'react-toastify'
 export const MainContent = () => {
   const {contents,refresh} = useContent();
   const [modalOpen, setModalOpen] = useState(false);
   useEffect(()=>{
     refresh();
   },[modalOpen])
-  const notify = () => toast("Link copied to clipboard");
   async function shareContent() {
-    notify();
-    <ToastContainer/>
     const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
       share:true
     },{

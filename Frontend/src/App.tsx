@@ -3,7 +3,7 @@ import { Dashboard } from './pages/Dashboard/Dashboard'
 import { BrowserRouter,Routes,Route } from "react-router-dom"
 import {Signup} from "./pages/Auth/Signup"
 import { Signin } from './pages/Auth/Signin'
-import { Share } from './pages/Share'
+import { Share  } from './pages/Share'
 function App() {
   return (
     <>
